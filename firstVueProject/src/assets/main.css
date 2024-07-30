@@ -1,0 +1,21 @@
+
+a,
+.green {
+  text-decoration: none;
+  color: rgb(207, 199, 199);
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (min-width: 1024px) {
+  /* body {
+    display: flex;
+    place-items: center;
+  }
+
+  #app {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 2rem;
+  } */
+}

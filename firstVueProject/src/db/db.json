@@ -1,0 +1,67 @@
+{
+  "user": [
+    {
+      "email": "amna@123.com",
+      "password": "a12345a",
+      "name": "Amna",
+      "bio": "this is a bio",
+      "id": "95d0"
+    },
+    {
+      "id": "212e",
+      "name": "Maria",
+      "email": "maria@123.co",
+      "password": "m12345m"
+    },
+    {
+      "id": "51f2",
+      "name": "Haram",
+      "email": "haram@test.com",
+      "password": "h123456h"
+    },
+    {
+      "id": "51e8",
+      "name": "fatima",
+      "email": "fat@123.com",
+      "password": "f123456f"
+    },
+    {
+      "id": "b894",
+      "name": "zainab",
+      "email": "zainab@123.com",
+      "password": "z123456z"
+    }
+  ],
+  "posts": [
+    {
+      "id": "88c0",
+      "name": "Haram",
+      "description": "nothing's on my mind"
+    },
+    {
+      "id": "4e92",
+      "name": "fatima",
+      "description": "hi guyss"
+    },
+    {
+      "id": "7a61",
+      "name": "zainab",
+      "description": "what's happening"
+    },
+    {
+      "id": "c9bb",
+      "name": "Maria",
+      "description": "guess who's back 😎"
+    },
+    {
+      "id": "50b1",
+      "name": "Amna",
+      "description": "hi everyone"
+    },
+    {
+      "id": "585a",
+      "name": "Maria",
+      "description": "hello"
+    }
+  ]
+}
