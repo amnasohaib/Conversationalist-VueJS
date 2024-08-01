@@ -64,7 +64,7 @@ router.post('/',  async (req, res) => {
 // like a post
 router.post('/:id/like', async (req, res) => {
     try {
-        const userId = req.body.userId;
+        const userId = req.body.UserId;
         const post = await postModel.findById(req.params.id);
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
