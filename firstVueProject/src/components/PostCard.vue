@@ -97,7 +97,18 @@ async function updatePost() {
 async function hasClickedLike(Postid) {
   try {
     console.log('post id ', Postid, ' curr user id ', currUser._id)
-    await store.dispatch('fetchLikes', { id: Postid, userId: currUser._id })
+    // await store.dispatch('fetchLikes', { id: Postid, userId: currUser._id })
+
+    const response = await axios.post(`${API_BASE_URL}dashboard`, {
+      transition: 'LIKEPOST',
+      data: {
+        PostId: Postid,
+        UserId: currUser._id
+      }
+    })
+    
+    console.log(response.data)
+
     location.reload()
   } catch (error) {
     console.log(error)

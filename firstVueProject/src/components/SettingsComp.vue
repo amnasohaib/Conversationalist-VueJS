@@ -1,23 +1,34 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-const data = computed(() => {
-  let x = store.getters.getSpecificUser
-  console.log('user acc computed ',x)
-  return x
-})
+// const data = computed(() => {
+//   let x = store.getters.getSpecificUser
+//   console.log('user acc computed ',x)
+//   return x
+// })
+
+const data = ref({})
 
 const showModal = ref(false)
 
 const editItem = ref({})
+
 const maskedPass = ref('')
 
 onMounted(async () => {
   try {
     const userdata = JSON.parse(localStorage.getItem('user-info'))
   console.log("useracc ",userdata._id)
-    await store.dispatch('fetchSpecificUser',{id: userdata._id})
-    console.log(data.value)
+    // await store.dispatch('fetchSpecificUser',{id: userdata._id})
+    const response = await axios.post(`${API_BASE_URL}dashboard`, {
+      transition: 'GETSPECIFICUSER',
+      data: {
+        userId: userdata._id
+      }
+    })
+
+    data.value = response.data.user
+    // console.log(data.value)
 
     maskedPass.value = '• '.repeat(10)
 
@@ -56,10 +67,23 @@ function openDialog(item) {
   showModal.value = true
 }
 
-function updateUser() {
+async function updateUser() {
   try {
-    console.log(editItem.value)
-    store.dispatch('updateUser', editItem.value)
+    const user = JSON.parse(JSON.stringify(editItem.value))
+    console.log(user)
+    // store.dispatch('updateUser', editItem.value)
+
+    const response = await axios.post(`${API_BASE_URL}dashboard`, {
+      transition: 'UPDATEUSER',
+      data: {
+          userId: user._id,
+
+          user: editItem.value
+      }
+    })
+
+    console.log(response.data)
+
     showModal.value = false
     // location.reload()
   } catch (error) {
