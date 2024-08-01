@@ -34,6 +34,13 @@ const postId = computed(() => {
 onMounted(async () => {
   // await store.dispatch('fetchComments')
   
+  fetchData();
+
+  await store.dispatch('fetchUser')
+  // console.log(user.value)
+})
+
+async function fetchData() {
   console.log('post id ', postId.value)
   console.log('connecting with  machine ')
     const response = await axios.post(`${API_BASE_URL}dashboard`, {
@@ -46,10 +53,8 @@ onMounted(async () => {
     console.log(response.data)
 
     items.value = response.data.comments
+}
 
-  await store.dispatch('fetchUser')
-  // console.log(user.value)
-})
 
 async function post() {
   try {
@@ -74,7 +79,8 @@ async function post() {
     
     console.log(response.data)
 
-    location.reload()
+    fetchData();
+    // location.reload()
   } catch (error) {
     console.error('Error during post:', error)
     alert('An error occurred. Please try again later.')
@@ -85,6 +91,8 @@ async function deletePost(CommentId) {
   try {
     console.log(CommentId)
     store.dispatch('deleteComment', CommentId)
+    fetchData();
+    // location.reload()
   } catch (error) {
     console.log(error)
     return error
@@ -108,7 +116,8 @@ async function hasClickedLike(commentId) {
     
     console.log(response.data)
 
-    location.reload()
+    fetchData();
+    // location.reload()
   } catch (error) {
     console.log(error)
     return error

@@ -32,6 +32,13 @@ const items = ref(null)
 onMounted(async () => {
   // await store.dispatch('fetchData')
 
+  fetchData();
+
+  // await store.dispatch('fetchUser')
+})
+
+
+async function fetchData() {
   console.log('connecting with  machine')
     const response = await axios.post(`${API_BASE_URL}dashboard`, {
       transition: 'GETPOSTS',
@@ -41,10 +48,7 @@ onMounted(async () => {
 
     console.log(response.data)
     items.value = response.data.posts
-
-  // await store.dispatch('fetchUser')
-})
-
+}
 
 async function deletePost(Postid) {
   try {
@@ -59,6 +63,8 @@ async function deletePost(Postid) {
     })
 
     console.log(response.data)
+    fetchData()
+    // location.reload()
   } catch (error) {
     console.log(error)
     return error
@@ -72,22 +78,22 @@ function openDialog(data) {
 
 async function updatePost() {
   try {
-    // store.dispatch('updateData', editItem.value)
+    store.dispatch('updateData', editItem.value)
 
-    console.log(editItem.value)
+    // console.log(editItem.value)
 
-    console.log('connecting with  machine ', editItem.value)
-    const response = await axios.post(`${API_BASE_URL}dashboard`, {
-      transition: 'UPDATEPOST',
-      data: {
-        post: editItem.value
-      }
-    })
+    // console.log('connecting with  machine ', editItem.value)
+    // const response = await axios.post(`${API_BASE_URL}dashboard`, {
+    //   transition: 'UPDATEPOST',
+    //   data: {
+    //     post: editItem.value
+    //   }
+    // })
 
-    console.log(response.data)
+    // console.log(response.data)
     
     showModal.value = false
-    // location.reload()
+    fetchData()
   } catch (error) {
     console.log(error)
     return error
@@ -108,8 +114,8 @@ async function hasClickedLike(Postid) {
     })
     
     console.log(response.data)
-
-    location.reload()
+    fetchData()
+    // location.reload()
   } catch (error) {
     console.log(error)
     return error
