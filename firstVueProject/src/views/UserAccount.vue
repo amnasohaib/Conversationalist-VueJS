@@ -7,12 +7,6 @@ import store from '@/store'
 import { ElMessage } from 'element-plus';
 
 
-// const data = computed(() => {
-//   let x = store.getters.getSpecificUser
-//   console.log('user acc computed ', x)
-//   return x
-// })
-
 const data = ref({})
 
 const API_BASE_URL = 'http://localhost:3000/'
@@ -140,7 +134,7 @@ async function comments(id) {
             <div class="icon">
               <el-icon><UserFilled /></el-icon>
             </div>
-            <div class="name">@{{ data.username }}</div>
+            <div class="user-name">@{{ data.username }}</div>
           </div>
           
           <div class="text-image">
@@ -282,7 +276,7 @@ h1 {
   flex-direction: column;
 }
 
-.name {
+.user-name {
   color: #4d5d53;
   font-size: 17px;
   text-align: center;

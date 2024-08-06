@@ -1,25 +1,8 @@
 const { Router } = require('express');
 const postModel = require('../../models/postModel')
-// const multer = require('multer');
 const router = Router()
-
-const fs = require("fs");
-const formidable = require("formidable");
 const path = require('path');
-const ObjectId = require('mongoose').Types.ObjectId;
 
-let directory = path.join(__dirname, "../../public/images")
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, 'uploads/'); // Uploads will be stored in 'uploads/' directory
-//     },
-//     filename: (req, file, cb) => {
-//       cb(null, file.originalname); // Keep original file name
-//     }
-//   });
-  
-//   const upload = multer({ storage });
 
 
 router.get('/', async(req, res) => {
@@ -35,7 +18,6 @@ router.get('/', async(req, res) => {
 router.get('/:username', async(req, res) => {
     const {username} = req.params;
     try {
-        console.log('hi')
         const post = await postModel.find({username: username});
         console.log(post)
         if (!post) throw new Error('no posts found');
@@ -46,9 +28,6 @@ router.get('/:username', async(req, res) => {
 })
 
 router.post('/',  async (req, res) => {
-    console.log(req.body.username)
-    console.log(req.body.description)
-    console.log(req.body.myFile)
     const post = req.body; 
     try { 
      const newPost = new postModel(post);
@@ -110,7 +89,6 @@ router.post('/:id/comments', async (req, res) => {
 //fetching a comment
 router.get('/:id/comments', async(req, res) => {
     try {
-        console.log('hi')
         const post = await postModel.findById(req.params.id);
         if (!post) throw new Error('no posts found');
 
@@ -130,14 +108,10 @@ router.post('/:id/comment/like', async (req, res) => {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        console.log('post ', post)
-
         const comment = post.comments.id(commentId);
         if (!comment) {
             return res.status(404).json({ message: 'Comment not found' });
         }
-
-        console.log('comment ', comment)
 
         const index = comment.likes.indexOf(userId);
         console.log('index ', index)
@@ -160,8 +134,6 @@ router.post('/:id/comment/like', async (req, res) => {
 router.put('/:id', async(req,res) => {
     const {id} = req.params;
     const {post} = req.body;
-    console.log('req.params; ', req.params)
-    console.log('req.body; ', post)
     try {
         const response = await postModel.findByIdAndUpdate(id, req.body);
         if(!response) throw Error('something went wrong while updating post');
@@ -191,7 +163,6 @@ router.delete('/:id/comment/:commentId', async(req,res) => {
         const post = await postModel.findById(id);
         if(!post) throw Error('Couldn\'t find post');
 
-        console.log('comment id ', commentId)
         const comment = post.comments.id(commentId)
 
         if(!comment) throw Error('comment not found');

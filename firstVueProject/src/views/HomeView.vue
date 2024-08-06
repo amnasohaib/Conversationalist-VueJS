@@ -54,21 +54,6 @@ async function handleFileUpload(e) {
   const file = e.target.files[0]
   const base64 = await convertToBase64(file)
 
-//   const img = new Image();
-// img.src = base64;
-
-// // Resize the image (e.g., to 300x200)
-// const canvas = document.createElement('canvas');
-// canvas.width = 300;
-// canvas.height = 200;
-// const ctx = canvas.getContext('2d');
-// ctx.drawImage(img, 0, 0, 300, 200);
-
-// // Get the resized base64 string
-// const resizedBase64 = canvas.toDataURL('image/jpeg', 0.8); 
-
-
-
   image.value = base64
   console.log(image.value)
 }
@@ -121,7 +106,7 @@ async function post() {
           <textarea
             v-model="description"
             class="input-card"
-             placeholder="update and post"
+             placeholder="whats on your mind?.."
             ></textarea>
             <!-- placeholder="What's on your mind?.." -->
           <div class="file-upload">

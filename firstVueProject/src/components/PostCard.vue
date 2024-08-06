@@ -78,7 +78,7 @@ function openDialog(data) {
 
 async function updatePost() {
   try {
-    store.dispatch('updateData', editItem.value)
+    await store.dispatch('updateData', editItem.value)
 
     // console.log(editItem.value)
 
@@ -91,9 +91,10 @@ async function updatePost() {
     // })
 
     // console.log(response.data)
+    fetchData()
     
     showModal.value = false
-    fetchData()
+    // location.reload()
   } catch (error) {
     console.log(error)
     return error

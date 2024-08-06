@@ -7,7 +7,7 @@ import { UserFilled } from '@element-plus/icons-vue'
   <div class="common-layout">
     <el-container>
       <el-header class="header">
-        <h2>Design&Communicate</h2>
+        <h2>Conversationalist</h2>
 
         <nav>
           <RouterLink to="/">Home</RouterLink>

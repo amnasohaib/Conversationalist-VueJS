@@ -82,7 +82,6 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { id } = req.params;
   const user = req.body;
-  console.log(req.body);
   try {
     const existingUser = await userModel.findOne({
         $or: [

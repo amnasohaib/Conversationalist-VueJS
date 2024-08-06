@@ -77,6 +77,7 @@ async function post() {
       }
     })
     
+    description.value = null
     console.log(response.data)
 
     fetchData();
@@ -90,7 +91,7 @@ async function post() {
 async function deletePost(CommentId) {
   try {
     console.log(CommentId)
-    store.dispatch('deleteComment', CommentId)
+    await store.dispatch('deleteComment', CommentId)
     fetchData();
     // location.reload()
   } catch (error) {
@@ -140,7 +141,7 @@ async function hasClickedLike(commentId) {
             <div class="icon">
               <el-icon><UserFilled /></el-icon>
             </div>
-            <div class="name">{{ item.username }}</div>
+            <div class="name">@{{ item.username }}</div>
           </div>
           <div>
             <p class="description">
@@ -182,9 +183,8 @@ async function hasClickedLike(commentId) {
             <div class="icon">
               <el-icon><UserFilled /></el-icon>
             </div>
-            <div class="name">{{ currUser.username }}</div>
+            <div class="name">@{{ currUser.username }}</div>
           </div>
-          <!-- <div class="input-card"> -->
           <textarea
             v-model="description"
             class="input-card"

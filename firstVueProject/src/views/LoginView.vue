@@ -81,6 +81,7 @@ async function fetch() {
     }
 
     console.log('connecting with  machine')
+    
     const response = await axios.post(`${API_BASE_URL}`, {
       transition: 'LOGIN',
       data: {

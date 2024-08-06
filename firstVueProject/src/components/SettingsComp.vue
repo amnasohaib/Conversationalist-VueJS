@@ -17,7 +17,15 @@ const maskedPass = ref('')
 
 onMounted(async () => {
   try {
-    const userdata = JSON.parse(localStorage.getItem('user-info'))
+    fetchUser();
+
+  } catch (error) {
+    return error
+  }
+})
+
+async function fetchUser() {
+  const userdata = JSON.parse(localStorage.getItem('user-info'))
   console.log("useracc ",userdata._id)
     // await store.dispatch('fetchSpecificUser',{id: userdata._id})
     const response = await axios.post(`${API_BASE_URL}dashboard`, {
@@ -31,11 +39,7 @@ onMounted(async () => {
     // console.log(data.value)
 
     maskedPass.value = '• '.repeat(10)
-
-  } catch (error) {
-    return error
-  }
-})
+}
 
 import { useRouter } from 'vue-router'
 import store from '@/store'
@@ -71,21 +75,22 @@ async function updateUser() {
   try {
     const user = JSON.parse(JSON.stringify(editItem.value))
     console.log(user)
-    // store.dispatch('updateUser', editItem.value)
+    store.dispatch('updateUser', editItem.value)
 
-    const response = await axios.post(`${API_BASE_URL}dashboard`, {
-      transition: 'UPDATEUSER',
-      data: {
-          userId: user._id,
+    // const response = await axios.post(`${API_BASE_URL}dashboard`, {
+    //   transition: 'UPDATEUSER',
+    //   data: {
+    //       userId: user._id,
 
-          user: editItem.value
-      }
-    })
+    //       user: editItem.value
+    //   }
+    // })
 
-    console.log(response.data)
+    // console.log(response.data)
 
     showModal.value = false
-    // location.reload()
+    fetchUser();
+    
   } catch (error) {
     if (error.response.status == 400) {
       ElMessage.error('user already exists.')
