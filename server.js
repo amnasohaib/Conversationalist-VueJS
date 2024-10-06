@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const path = require("path");
 const { PORT } = require('./config')
+const { mongoURI } = require('./config')
 // const morgan = require('morgan');
 const userRoute = require("./routes/api/user");
 const postRoute = require("./routes/api/post");
@@ -31,7 +32,7 @@ app.get("/", (req, res) => {
 
 // MongoDB Connection
 
-mongoose.connect('mongodb://0.0.0.0:27017/discussion-forum')
+mongoose.connect(mongoURI)
 .then((db)=>{
   console.log("database connected successfully")
 },(err)=>{

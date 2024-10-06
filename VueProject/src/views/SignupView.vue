@@ -24,7 +24,7 @@
     <input
       type="password"
       placeholder="Enter Password"
-      @input="(event) => checkPassword(event)"
+      @input="checkPassword"
       v-model="newUser.password"
       required
     />
@@ -50,6 +50,7 @@ const newUser = ref({
   password: ''
 })
 
+
 const emailError = ref('')
 const passwordError = ref('')
 
@@ -63,18 +64,18 @@ function checkEmail() {
   }
 }
 
-function checkPassword(event) {
-  if (!newUser.value.password) {
-    passwordError.value = ''
-  } else if (newUser.value.password.toUpperCase() === newUser.value.password && newUser.value.password.toLowerCase() !== newUser.value.password && !event.shiftKey ) {
-    passwordError.value = 'Warning: Caps Lock is on!'
-  } else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(newUser.value.password)) {
-    passwordError.value =
-      'Password must be minimum eight characters, at least one letter and one number.'
-  }
-  else {
-    passwordError.value = ''
-  }
+function checkPassword() {
+  passwordError.value = '';
+
+// Regex validation for password strength
+if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(newUser.value.password)) {
+  passwordError.value =
+    'Password must be at least 8 characters, include at least one letter and one number.';
+  return;
+}
+
+// If no errors, clear the passwordError
+passwordError.value = '';
 }
 
 async function post() {

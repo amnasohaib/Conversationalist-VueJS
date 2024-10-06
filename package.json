@@ -6,7 +6,10 @@
   "scripts": {
     "server": "nodemon server.js --ignore 'VueProject/'",
     "client": "npm run serve --prefix VueProject",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "fsm": "node xstate-server/server.js",
+    "build-client": "npm run build --prefix VueProject",
+    "build": "npm run build-client && cp -R VueProject/dist/* public/", 
+    "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run fsm\""
   },
   "keywords": [],
   "author": "",
